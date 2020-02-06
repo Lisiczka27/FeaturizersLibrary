@@ -39,7 +39,7 @@ steps:
 
       inputs:
         SourceFolder: "$(Pipeline.Workspace)/${{ artifact }}"
-        TargetFolder: "$(Pipeline.Workspace)/upload/Test_Latest_build_$(pipeline_product_version)/${{ artifact }}"
+        TargetFolder: "$(Pipeline.Workspace)/upload/Latest_build/${{ artifact }}"
 
   - task: AzureFileCopy@2
     displayName: "Azure Upload"
@@ -52,15 +52,3 @@ steps:
       Destination: AzureBlob
       storage: '${{ parameters.storage_account }}'
       ContainerName: '${{ parameters.container }}'
-
-  - task: AzurePowerShell@4
-    displayName: "Azure operations"
-
-    timeoutInMinutes: 180
-
-    inputs:
-      azureSubscription: '${{ parameters.subscription_id }}'
-      scriptType: inlineScript
-      inline: |-
-        Rename-Item -Path "${{ parameters.storage_account }}/${{ parameters.container }}/static" -NewName "${{ parameters.storage_account }}/${{ parameters.container }}/test_change_name"
-      azurePowerShellVersion: latestVersion
