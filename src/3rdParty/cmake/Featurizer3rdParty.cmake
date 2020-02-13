@@ -58,14 +58,11 @@ function(Impl)
     elseif (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC" )
         set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
     elseif (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
-        find_program(LSB_RELEASE_EXEC lsb_release)
-        execute_process(COMMAND ${LSB_RELEASE_EXEC} -is
-            OUTPUT_VARIABLE LSB_RELEASE_ID_SHORT
-            OUTPUT_STRIP_TRAILING_WHITESPACE
-        )
-
-        MESSAGE(LSB_RELEASE_ID_SHORT)
-        MESSAGE("DONE")
+        
+        file(READ "/etc/issue" ETC_ISSUE)
+        string(REGEX MATCH "CentOS" DIST ${ETC_ISSUE})
+        if(DIST STREQUAL "CentOS")
+            MESSAGE("CENTOS")
 
         find_package(Threads)
         target_link_libraries(Featurizer3rdParty PUBLIC ${CMAKE_THREAD_LIBS_INIT})
