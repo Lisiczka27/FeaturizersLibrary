@@ -48,6 +48,8 @@ function(Impl)
     # Add re2
     get_filename_component(_compiler_basename "${CMAKE_CXX_COMPILER}" NAME)
 
+    MESSAGE(CMAKE_CXX_IMPLICIT_LINK_DIRECTORIES)
+
     PreserveCompilerSettings()
     if (CMAKE_CXX_COMPILER_ID MATCHES Clang OR _compiler_basename MATCHES "clang-cl.exe")
         set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -w")
