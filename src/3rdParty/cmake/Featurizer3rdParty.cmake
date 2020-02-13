@@ -63,6 +63,7 @@ function(Impl)
         string(REGEX MATCH "CentOS" DIST ${ETC_ISSUE})
         if(DIST STREQUAL "CentOS")
             MESSAGE("CENTOS")
+        endif()
 
         find_package(Threads)
         target_link_libraries(Featurizer3rdParty PUBLIC ${CMAKE_THREAD_LIBS_INIT})
