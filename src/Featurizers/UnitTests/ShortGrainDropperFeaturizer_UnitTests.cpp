@@ -61,7 +61,7 @@ void TestImpl(){
 
     auto const              callback(
         [&output](bool value) {
-            output.insert(value);
+            output.push_back(value);
         }
     );
 
