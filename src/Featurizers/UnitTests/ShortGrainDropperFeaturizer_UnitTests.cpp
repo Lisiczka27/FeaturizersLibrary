@@ -52,13 +52,25 @@ void TestImpl(){
     std::uint32_t maxHorizon = 1;
     nonstd::optional<std::uint32_t> cv = static_cast<std::uint32_t>(1);
 
-    CHECK(
-        NS::TestHelpers::TransformerEstimatorTest(
-            NS::Featurizers::ShortGrainDropperEstimator<std::numeric_limits<size_t>::max()>(NS::CreateTestAnnotationMapsPtr(1), 0, windowSize, lags, maxHorizon, cv),
-            trainingBatches,
-            inferencingInput
-        ) == inferencingOutput
+    using SGDEstimator = NS::Featurizers::ShortGrainDropperEstimator<std::numeric_limits<size_t>::max()>;
+    SGDEstimator                     estimator(NS::CreateTestAnnotationMapsPtr(1), 0, windowSize, lags, maxHorizon, cv);
+
+    NS::TestHelpers::Train<SGDEstimator, std::vector<std::string>>(estimator, trainingBatches);
+    SGDEstimator::TransformerUniquePtr                  pTransformer(estimator.create_transformer());
+    std::vector<bool>   	  output;
+
+    auto const              callback(
+        [&output](bool value) {
+            output.emplace_back(value);
+        }
     );
+
+    for(auto const &item : inferencingInput)
+        pTransformer->execute(item, callback);
+
+    pTransformer->flush(callback);
+
+    CHECK(output == inferencingOutput);
 }
 
 TEST_CASE("Invalid Transformer/Estimator") {
