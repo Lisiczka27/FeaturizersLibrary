@@ -57,11 +57,11 @@ void TestImpl(){
 
     NS::TestHelpers::Train<SGDEstimator, std::vector<std::string>>(estimator, trainingBatches);
     SGDEstimator::TransformerUniquePtr                  pTransformer(estimator.create_transformer());
-    std::vector<bool>   	  output;
+    std::vector<bool>   	                            output;
 
     auto const              callback(
         [&output](bool value) {
-            output.emplace_back(value);
+            output.insert(value);
         }
     );
 
