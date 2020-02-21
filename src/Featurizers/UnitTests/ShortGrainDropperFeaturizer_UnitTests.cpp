@@ -8,6 +8,7 @@
 #include "../../Featurizers/ShortGrainDropperFeaturizer.h"
 #include "../TestHelpers.h"
 #include "../../Archive.h"
+#include "../../Traits.h"
 
 namespace NS = Microsoft::Featurizer;
 
