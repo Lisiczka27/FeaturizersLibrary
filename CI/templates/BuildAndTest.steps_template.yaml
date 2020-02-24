@@ -25,6 +25,14 @@ parameters:
     # 'PerformanceTests: ' $(pipeline_tester_release_only_arg) $(pipeline_tester_build_only_arg)'
 
 steps:
+  - script: |
+      free -m
+      cat /proc/cpuinfo | grep processor | wc -l
+
+    displayName: 'BugBug'
+
+
+
   - task: PythonScript@0
     displayName: "[DEBUG] Display Variables"
 
