@@ -14,7 +14,7 @@ resources:
     - container: centos7
       image: centos7
       # BugBug: Document
-      options: --cpus="0.5"
+      options: --cpus 0.5
       endpoint: featurizerslibrarybuild
 
 stages:
@@ -47,15 +47,15 @@ stages:
       # BugBug     configuration: x86
       # BugBug     job_display_name: "Windows-x86-Clang 8.0.0"
       # BugBug     operating_system: Windows
-
-      - template: "templates/BuildAndTest.job_template.yaml"
-        parameters:
-          agent_pool: FeaturizersLibrary
-          agent_pool_is_custom: true
-          configuration: system_compiler
-          job_display_name: "Ubuntu 16.04-x64-GCC 5.4.0"
-          operating_system: Linux
-
+      # BugBug
+      # BugBug - template: "templates/BuildAndTest.job_template.yaml"
+      # BugBug   parameters:
+      # BugBug     agent_pool: FeaturizersLibrary
+      # BugBug     agent_pool_is_custom: true
+      # BugBug     configuration: system_compiler
+      # BugBug     job_display_name: "Ubuntu 16.04-x64-GCC 5.4.0"
+      # BugBug     operating_system: Linux
+      # BugBug
       # BugBug - template: "templates/BuildAndTest.job_template.yaml"
       # BugBug   parameters:
       # BugBug     agent_pool: macOS-10.14
