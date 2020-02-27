@@ -13,8 +13,6 @@ resources:
 
     - container: centos7
       image: centos7
-      # BugBug: Document
-      options: --cpus 0.5
       endpoint: featurizerslibrarybuild
 
 stages:

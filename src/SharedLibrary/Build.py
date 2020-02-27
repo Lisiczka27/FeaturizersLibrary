@@ -44,6 +44,10 @@ JSON_FILENAME                               = "Microsoft MLFeaturizers.FileAttri
     cmake_generator=CommandLine.StringTypeInfo(
         arity="?",
     ),
+    cpus=CommandLine.IntTypeInfo(
+        min=1,
+        arity="?",
+    ),
     output_stream=None,
 )
 def Build(
@@ -56,6 +60,7 @@ def Build(
     cmake_generator=(
         None if os.getenv("DEVELOPMENT_ENVIRONMENT_REPOSITORY_CONFIGURATION") == "universal_linux" or os.getenv("DEVELOPMENT_ENVIRONMENT_CPP_USE_DEFAULT_CMAKE_GENERATOR") else "Ninja"
     ),
+    cpus=None,
     output_stream=sys.stdout,
     verbose=False,
 ):
@@ -128,7 +133,9 @@ def Build(
                             ),
                         ),
                     ),
-                    ("Building", "cmake --build ."),
+                    (
+                        "Building", "cmake --build .{}".format(" -j {}".format(cpus) if cpus is not None else ""),
+                    ),
                 ]
 
                 if (
