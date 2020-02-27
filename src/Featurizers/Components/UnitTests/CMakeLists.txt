@@ -16,6 +16,8 @@ if(NOT WIN32)
     string(REPLACE ":" ";" _libs "${_libs}")
 endif()
 
+set(CMAKE_VERBOSE_MAKEFILE ON) # BugBug
+
 include(CppCommon OPTIONAL)
 
 set(CMAKE_CXX_STANDARD 11)

@@ -121,7 +121,7 @@ def Build(
                 activities = [
                     (
                         "Generating cmake Files",
-                        'cmake {generator}-DCMAKE_BUILD_TYPE={configuration} -DCMAKE_VERBOSE_MAKEFILE:BOOL=ON {prerelease_build_name} "{this_dir}"'.format(
+                        'cmake {generator}-DCMAKE_BUILD_TYPE={configuration} {prerelease_build_name} "{this_dir}"'.format(
                             generator='-G "{}" '.format(
                                 cmake_generator,
                             ) if cmake_generator else "",
